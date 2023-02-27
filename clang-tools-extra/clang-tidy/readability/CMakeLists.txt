@@ -12,6 +12,7 @@ add_clang_library(clangTidyReadabilityModule
   ContainerSizeEmptyCheck.cpp
   ConvertMemberFunctionsToStatic.cpp
   DeleteNullPointerCheck.cpp
+  DemoCheck.cpp
   DuplicateIncludeCheck.cpp
   ElseAfterReturnCheck.cpp
   FunctionCognitiveComplexityCheck.cpp

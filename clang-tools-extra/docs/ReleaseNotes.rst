@@ -181,6 +181,11 @@ New checks
   Future libc++ will remove the extension (`D120996
   <https://reviews.llvm.org/D120996>`).
 
+- New :doc:`readability-Demo
+  <clang-tidy/checks/readability/Demo>` check.
+
+  FIXME: add release notes.
+
 New check aliases
 ^^^^^^^^^^^^^^^^^
 

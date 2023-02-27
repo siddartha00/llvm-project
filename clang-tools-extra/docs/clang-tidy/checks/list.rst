@@ -318,6 +318,7 @@ Clang-Tidy Checks
    `portability-restrict-system-includes <portability/restrict-system-includes.html>`_, "Yes"
    `portability-simd-intrinsics <portability/simd-intrinsics.html>`_,
    `portability-std-allocator-const <portability/std-allocator-const.html>`_,
+   `readability-Demo <readability/Demo.html>`_, "Yes"
    `readability-avoid-const-params-in-decls <readability/avoid-const-params-in-decls.html>`_, "Yes"
    `readability-braces-around-statements <readability/braces-around-statements.html>`_, "Yes"
    `readability-const-return-type <readability/const-return-type.html>`_, "Yes"
