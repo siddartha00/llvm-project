@@ -18,18 +18,17 @@ namespace readability {
 
 void DemoCheck::registerMatchers(MatchFinder *Finder) {
   // FIXME: Add matchers.
-  Finder->addMatcher(functionDecl().bind("x"), this);
+  Finder->addMatcher(binaryOperator(isComparisonOperator()).bind("x"), this);
 }
 
 void DemoCheck::check(const MatchFinder::MatchResult &Result) {
   // FIXME: Add callback implementation.
-  const auto *MatchedDecl = Result.Nodes.getNodeAs<FunctionDecl>("x");
-  if (!MatchedDecl->getIdentifier() || MatchedDecl->getName().startswith("awesome_"))
+  const auto *MatchedDecl = Result.Nodes.getNodeAs<BinaryOperator>("x");
+  if (MatchedDecl->getLHS()->getObjCProperty()->isImplicitProperty())
     return;
-  diag(MatchedDecl->getLocation(), "function %0 is insufficiently awesome")
-      << MatchedDecl;
-  diag(MatchedDecl->getLocation(), "insert 'awesome'", DiagnosticIDs::Note)
-      << FixItHint::CreateInsertion(MatchedDecl->getLocation(), "awesome_");
+  diag(MatchedDecl->getBeginLoc(), "Constants are preferred on the LHS");
+  /*diag(MatchedDecl->getLocation(), "insert 'awesome'", DiagnosticIDs::Note)
+      << FixItHint::CreateInsertion(MatchedDecl->getLocation(), "awesome_");*/
 }
 
 } // namespace readability
