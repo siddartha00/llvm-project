@@ -9,6 +9,7 @@
 #include "DemoCheck.h"
 #include "clang/AST/ASTContext.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
+#include "clang/ASTMatchers/ASTMatchers.h"
 
 using namespace clang::ast_matchers;
 
@@ -18,7 +19,7 @@ namespace readability {
 
 void DemoCheck::registerMatchers(MatchFinder *Finder) {
   // FIXME: Add matchers.
-  Finder->addMatcher(binaryOperator(isComparisonOperator()).bind("x"), this);
+  Finder->addMatcher(binaryOperator(hasOperatorName("==")).bind("x"), this);
 }
 
 void DemoCheck::check(const MatchFinder::MatchResult &Result) {
@@ -26,7 +27,7 @@ void DemoCheck::check(const MatchFinder::MatchResult &Result) {
   const auto *MatchedDecl = Result.Nodes.getNodeAs<BinaryOperator>("x");
   if (MatchedDecl->getLHS()->getObjCProperty()->isImplicitProperty())
     return;
-  diag(MatchedDecl->getBeginLoc(), "Constants are preferred on the LHS");
+  diag(MatchedDecl->getBeginLoc(), "Expecting a constant on the LHS of the equality");
   /*diag(MatchedDecl->getLocation(), "insert 'awesome'", DiagnosticIDs::Note)
       << FixItHint::CreateInsertion(MatchedDecl->getLocation(), "awesome_");*/
 }
